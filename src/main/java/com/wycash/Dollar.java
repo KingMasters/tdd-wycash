@@ -1,13 +1,18 @@
 package com.wycash;
 
-class Dollar {
-    int amount;
+class Dollar extends Money {
+    //private int amount;
 
     Dollar(int amount) {
         this.amount = amount;
     }
 
-    void times(int multiplier) {
-        amount *= multiplier;
+    Dollar times(int multiplier) {
+        return new Dollar(amount * multiplier);
+    }
+
+    public boolean equals(Object object) {
+        Money money = (Money) object;
+        return this.amount == money.amount;
     }
 }
