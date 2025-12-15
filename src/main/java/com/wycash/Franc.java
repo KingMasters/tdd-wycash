@@ -2,13 +2,18 @@ package com.wycash;
 
 class Franc extends Money{
     //private int amount;
+    private String currency;
 
-    Franc(int amount) {
+    Franc(int amount, String currency) {
         this.amount = amount;
+        this.currency = currency;
+    }
+    String currency() {
+        return currency;
     }
 
     Money times(int multiplier) {
-        return new Franc(amount * multiplier);
+        return Money.franc(amount * multiplier);
     }
 
 }
