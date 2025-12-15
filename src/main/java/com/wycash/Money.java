@@ -1,12 +1,16 @@
 package com.wycash;
 
-class Money {
-    protected int amount;
-    protected String currency;
+class Money implements Expression{
+    int amount;
+    String currency;
 
     Money(int amount, String currency) {
         this.amount = amount;
         this.currency = currency;
+    }
+
+    Expression plus(Money addend) {
+        return new Money(amount + addend.amount, currency);
     }
 
     Money times(int multiplier) {
