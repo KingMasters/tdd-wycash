@@ -6,9 +6,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class MoneyTest {
 
     @Test
+    void testDifferentClassEquality(){
+        assertTrue(new Money(10, "CHF").equals(new Franc(10, "CHF")));
+        assertTrue(new Money(10, "USD").equals(new Dollar(10, "USD")));
+
+    }
+
+    @Test
     void testCurrency() {
-        assertEquals("USD", Money.dollar(1).currency());
-        assertEquals("CHF", Money.franc(1).currency());
+        assertEquals("USD", Money.dollar(1).currency);
+        assertEquals("CHF", Money.franc(1).currency);
     }
 
     @Test
@@ -35,4 +42,6 @@ class MoneyTest {
         assertFalse(Money.franc(5).equals(Money.dollar(5)));
 
     }
+
+
 }

@@ -1,21 +1,27 @@
 package com.wycash;
 
-abstract class Money {
+class Money {
     protected int amount;
     protected String currency;
-
-    abstract Money times(int multiplier);
-    abstract String currency();
 
     Money(int amount, String currency) {
         this.amount = amount;
         this.currency = currency;
     }
 
+    Money times(int multiplier) {
+        return new Money(amount * multiplier, currency);
+    }
+
+    public String toString() {
+        return amount + " " + currency;
+    }
+
+
     public boolean equals(Object object) {
         Money money = (Money) object;
         return this.amount == money.amount
-                && this.getClass() == money.getClass();
+                && currency.equals(money.currency);
     }
 
     static Money dollar(int amount){
