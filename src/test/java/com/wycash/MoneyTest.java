@@ -5,6 +5,33 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MoneyTest {
+    @Test
+    void testPlusSameCurrencyReturnsMoney() {
+        Expression sum= Money.dollar(1).plus(Money.dollar(1));
+        assertTrue(sum instanceof Sum);
+    }
+
+    @Test
+    void testSumTimes() {
+        Expression five= Money.dollar(5);
+        Expression tenFrancs= Money.franc(10);
+        Bank bank= new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Expression sum= new Sum(five, tenFrancs).times(2);
+        Money result= bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(20), result);
+    }
+
+    @Test
+    void testSumPlusMoney() {
+        Expression fiveBucks= Money.dollar(5);
+        Expression tenFrancs= Money.franc(10);
+        Bank bank= new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Expression sum= new Sum(fiveBucks, tenFrancs).plus(fiveBucks);
+        Money result= bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(15), result);
+    }
 
     @Test
     void testMixedAddition() {
